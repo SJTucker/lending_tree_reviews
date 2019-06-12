@@ -15,8 +15,6 @@ def request_page(page_number,url,hdr):
 	html = BeautifulSoup(page, 'html.parser')
 	#import pdb; pdb.set_trace()
 	more_reviews = True if html.find('ul', class_='lenderNav').find(text='Next') else False
-	#more_reviews = False
-	print(url)
 	review_panels = html.find_all('div', class_='mainReviews')
 	return more_reviews, review_panels
 
@@ -25,14 +23,12 @@ more_reviews = True
 page_number = 1
 
 while more_reviews:
-	more_reviews, review_panels = request_page(page_number,url,hdr)
-	# if page_number == 3:
-	# 	import pdb; pdb.set_trace() 
+	more_reviews, review_panels = request_page(page_number,url,hdr) 
 
 	for review in review_panels:
 		consumer = review.find('p',class_='consumerName').text.split('from')
 		review_points = review.find('div',class_='reviewPoints')
-		#print(review)
+
 		rev = {
 			'title': review.find('p',class_='reviewTitle').string,
 			'body': review.find('p',class_='reviewText').string,
@@ -44,12 +40,11 @@ while more_reviews:
 			'loanType': review_points.find('div',class_='loanType').string,
 			'reviewType': review_points.find('div',class_='loanType').string
 		}
+
 		reviews.append(rev)
-		#time.sleep(1)
 
-	print('******')
-	print(page_number)
 	page_number += 1
-	#moreReviews = False
+	if page_number == 3:
+		more_reviews = False 
 
-print(len(reviews))
+print(json.dumps(reviews))
