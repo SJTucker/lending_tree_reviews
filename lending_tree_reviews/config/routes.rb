@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
 	namespace :api do
-		get 'reviews/:url' => 'reviews#show', :constraints => {:url => /.*/}
+		get 'reviews' => 'reviews#show'
 	end
 end

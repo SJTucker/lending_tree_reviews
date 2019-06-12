@@ -1,6 +1,6 @@
 class API::ReviewsController < ApplicationController
 	def show
-		reviews = `~/code/lending_tree_reviews/reviews_scraper/reviews_scraper.py` 
+		reviews = ::Reviews::Scraper.new(request.query_parameters[:url]).scrape_reviews 
 		render json: reviews
 	end
 end
