@@ -17,7 +17,7 @@ module Reviews
 				request_page
 				@reviews << reviews_set
 
-				print @page_number
+				print "*#{@page_number}*"
 			end
 
 			@reviews
@@ -28,7 +28,7 @@ module Reviews
 			@html = Nokogiri::HTML.parse(open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE))
 
 			@more_reviews = false unless @html.css('.lenderNav').at('a:contains("Next")')
-			@more_reviews = false if @page_number == 20
+			@more_reviews = false if @page_number == 5
 		end
 
 		def review_panels
