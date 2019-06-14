@@ -14,9 +14,14 @@ describe API::ReviewsController do
 			expect(response).to have_http_status :success
 		end
 
-		it 'retrieves all reviews' do
-			subject
+		it 'retrieves all reviews if limit set to 0' do
+			get :show, params: { url: 'https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183', limit: 0 }
 			expect(JSON.parse(response.body).length).to eq 20
+		end
+
+		it 'respects the default limit' do
+			subject
+			expect(JSON.parse(response.body).length).to eq 15
 		end
 	end
 

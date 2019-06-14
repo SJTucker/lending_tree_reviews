@@ -1,5 +1,5 @@
 describe ::Reviews::Scraper do
-	subject { klass.new 'https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183' }
+	subject { klass.new 'https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183', 0 }
 
 	before do
 		stub_request(:get, 'https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183?pid=1').to_return status: 200, body: File.read(Rails.root.join('spec', 'support', 'stubs', 'reviews', 'reliance.html'))

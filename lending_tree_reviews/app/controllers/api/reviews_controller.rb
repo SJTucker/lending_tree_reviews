@@ -2,7 +2,7 @@ class API::ReviewsController < ApplicationController
 	before_action :require_url
 
 	def show
-		reviews = ::Reviews::Scraper.new(reviews_url).scrape_reviews 
+		reviews = ::Reviews::Scraper.new(reviews_url, limit).scrape_reviews 
 		render json: reviews
 	rescue Errno::ENOENT => e
 		bad_request
@@ -13,6 +13,10 @@ class API::ReviewsController < ApplicationController
 	private
 		def reviews_url
 			request.query_parameters[:url]
+		end
+
+		def limit
+			request.query_parameters[:limit] || 15
 		end
 
 		def bad_request
