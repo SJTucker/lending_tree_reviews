@@ -40,7 +40,6 @@ end
 
 group :test do
   gem 'webmock'
-  gem 'webmock-rspec-helper'
   gem 'rspec-rails'
 end
 

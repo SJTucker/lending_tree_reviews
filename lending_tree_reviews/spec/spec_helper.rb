@@ -1,5 +1,13 @@
-require 'webmock/rspec'
+#require 'rails/all'
+#require 'rspec/rails'
+
 require File.expand_path('../../config/environment', __FILE__)
+
+require 'rails/all'
+require 'webmock/rspec'
+require 'rspec/rails'
+require "active_record/railtie"
+require "action_controller/railtie"
 
 module KlassHelper
   def klass
